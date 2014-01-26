@@ -1,0 +1,130 @@
+body
+{
+  min-width: 540px;
+}
+
+
+
+
+.centerGroup
+{
+  margin: 0 auto;
+  text-align: center; 
+}
+
+.bkg-div
+{
+    background-image: url(/images/cpsc2.png);
+    background-repeat:no-repeat;
+
+}
+
+.btn
+{
+}
+
+.cpsc120
+{
+    margin-bottom: 48px; 
+    margin-top: 16px
+}
+
+.cpsc121
+{
+    margin-bottom:48px; 
+}
+
+.cpsc131
+{
+    margin-bottom: 62px; 
+}
+
+
+
+.cpsc1
+{
+    margin-left: 110px;
+    margin-right: 60px;
+
+}
+
+.cpsc2
+{
+    margin-right:240px; 
+}
+
+.cpsc3
+{
+    margin-right: 60px; 
+}
+    
+
+.tier_div
+{
+    text-align:left; 
+        
+}
+
+
+.cpsc4
+{
+    margin-top: 68px; 
+    margin-left: 295px;
+    margin-right: 72px;
+    
+    
+}
+
+.cpsc5
+{
+    margin-top: 68px; 
+    margin-right: 42px;
+    
+}
+
+.cpsc6
+{
+    margin-top: 68px; 
+    margin-right: 60px; 
+}
+
+.cpsc7
+{
+    margin-top: 68px; 
+}
+
+.cpsc8
+{
+    margin-top:62px; 
+    margin-right:72px;
+    margin-left: 295px; 
+}
+
+.cpsc9
+{
+    margin-top: 62px; 
+    margin-right:42px; 
+}
+
+.cpsc10
+{
+    margin-top: 62px; 
+    margin-right: 60px; 
+}
+
+.cpsc11
+{
+    margin-top: 57px; 
+    margin-right:15px; 
+    margin-left: -30px; 
+}
+
+.cpsc12
+{
+    margin-top: 57px; 
+    margin-right:425px;  
+}
+.cpsc13
+{
+    margin-top: 57px; 
+}
