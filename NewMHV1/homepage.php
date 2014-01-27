@@ -1,102 +1,6 @@
 <?php
-    // If allowed, unlimited script execution time
-   set_time_limit(0);
-
-/* Patient information struct */
-class PatientStruct
-{
-	public $id;            // patient id
-	public $firstName;     // first name
-	public $lastName;      // last name
-}
-
-$patients = array(); // array of patient structs
-
-function getDropDownBoxData()
-{/*
-    //Predefined database 
-    $dbhost = ":/Applications/MAMP/tmp/mysql/mysql.sock"; 
-    $dbuser = "root";
-    $dbpass = "root"; 
-    $dbname = "residents";
-
-    // 1. Create a database connection
-    $connection = mysql_connect($dbhost, $dbuser, $dbpass) or die ("Unable to connect to MySQL"); 
-
-    // select a database to work with
-    $selected = mysql_select_db($dbname, $connection); 
-
-	// Perform database query
-	$query = "SELECT * FROM resident"; 
-	$result = mysql_query($query); 
-	
-	// Test if there is a query fail!
-	if(!$result)
-	{
-		die("Database query failed."); 
-	}
-	
-	// Use returned data (populate patients array)
-	while ($row = mysql_fetch_array($result))
-	{
-		//echo "i am in"; 
-		// populate patient struct
-		$p = new PatientStruct(); // create one instance of a patient struct
-		
-		$p->id = $row{'resident_id'}; 
-		 
-		$p->firstName = $row{'first_name'}; 
-		
-		$p->lastName = $row{'last_name'}; 
-		//push istance into the array of patients
-		array_push($GLOBALS["patients"], $p); 
-	}
-    
-	// 4. Release returned data
-	mysql_free_result($result); 
-
-	// 5. Close database
-	mysql_close($connection);*/ 
-	// Jaime link and connect to the database 
-	$connection=mysql_connect("localhost");
-
-	$sel= mysql_select_db("residents",$connection)// Checking connection
-		or die("I diied!!");
-
-	$result = mysql_query("SELECT * FROM resident");
-
-	if(!$result){echo mysql_error();}
-
-	while ($row = mysql_fetch_array($result))
-	{
-		$p =  new PatientStruct();
-		$p->id = $row{'resident_id'};
-		$p->firstName = $row{'first_name'};
-		$p->lastName = $row{'last_name'};
-		// Push the populated node into the array
-		array_push($GLOBALS["patients"], $p);		
-	}
-	mysql_close($connection);
-}
-
-//Generate the patient dropdown box
-function generateDropDownBox()
-{
-		echo '<FORM method="GET" action="data.php" >';
-		echo '<select name="patient" class = "btn btn-primary btn-lg box " ONCHANGE="this.form.submit();">';
-	
-		echo "<option value = 0></option>";
-
-		/* Place each patient in the dropdown box */
-		foreach ($GLOBALS["patients"] as &$person) 
-		{
-			echo "<option value = ".$person->id.">".$person->lastName.", ".$person->firstName." ".$person->id."</option>";
-		}//End foreach
-	
-		echo "</select>";
-		echo '</FORM>';		
-}
-
+include('includes/base.functions.php');
+include('includes/base.header.php');
 ?>
 
 <!DOCTYPE html>  
@@ -156,8 +60,7 @@ function generateDropDownBox()
 		<!--Drop down thing -->
 		<div>
             <?php
-			getDropDownBoxData();
-			generateDropDownBox();
+			generateDropDownBox($patients);
 			?>
 		</div>
 	</div>

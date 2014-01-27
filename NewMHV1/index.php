@@ -38,7 +38,7 @@
       <form class="form-signin">
         <h3 class="form-signin-heading">Please sign in</h3>
         <input type="text" class="form-control" placeholder="Email address" name = "user"required autofocus>
-        <input type="password" class="form-control" placeholder="Password" name = "password"required>1
+        <input type="password" class="form-control" placeholder="Password" name = "password"required>
         <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="check(this.form)">Sign in</button>
       </form>
         
