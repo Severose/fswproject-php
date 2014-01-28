@@ -34,7 +34,11 @@ function generateDropDownBox(&$patients)
 	/* Place each patient in the dropdown box */
 	foreach ($patients as &$person) 
 	{
-		echo "<option value = ".$person->id.">".$person->lastName.", ".$person->firstName." ".$person->id."</option>";
+		if($person->id == $_GET['patient']){
+			echo "<option selected='1' value = ".$person->id.">".$person->lastName.", ".$person->firstName." ".$person->id."</option>";
+		}else{
+			echo "<option value = ".$person->id.">".$person->lastName.", ".$person->firstName." ".$person->id."</option>";
+		};
 	}//End foreach
 
 	echo "</select>";
