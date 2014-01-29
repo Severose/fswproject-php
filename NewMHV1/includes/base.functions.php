@@ -1,6 +1,7 @@
 <?php
 include('mysql.php');
 include('base.class.php');
+ini_set( 'display_errors', 0 );
 
 /* Function which generates the webpage; called when a patient is selected from the dropdown box
  * @param selectedOption - current patient ID */
