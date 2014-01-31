@@ -15,6 +15,7 @@ include('includes/base.header.php');
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.css" rel="stylesheet">
 
+
     <!-- Custom styles for this template -->
     <link href="navbar.css" rel="stylesheet">
 	 <link href="homepage.css" rel="stylesheet">

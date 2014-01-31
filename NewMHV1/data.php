@@ -13,7 +13,9 @@ include('includes/base.header.php');
  <title>Data</title>
 
     <!-- Bootstrap core CSS -->
+
     <link href="./css/bootstrap.css" rel="stylesheet">
+
 
     <!-- Custom styles for this template -->
     <link href="navbar.css" rel="stylesheet">
@@ -105,8 +107,17 @@ include('includes/base.header.php');
 
 				echo "					<h4 style=\"overflow:hidden; white-space:nowrap; text-overflow:ellipsis;\" >$resident->address1</h4>";
 				echo "					<h4 style=\"overflow:hidden; white-space:nowrap; text-overflow:ellipsis;\" >$resident->address2</h4>";
+
 				?> 
+								<form role="form"  action="insert.php" method = "post">
+					<input type='hidden' name='edit' value='<?php echo $selectedOption; ?>'>
+					<button type="submit" class="btn btn-primary btn-lg" name = "submit">Edit Info</button>
+				</form>
 			
+
+		
+
+
 			</div>
 			
 		</div>
@@ -115,7 +126,7 @@ include('includes/base.header.php');
 	</div>
 		
 	<div>
-		<div class = "jumbotron" style = "float: left;  height: 447px; width: 30%;">
+		<div class = "jumbotron" style = "float: left;  height: 495px; width: 30%;">
 			<div>
 				<?php
 				//doctor info
@@ -134,7 +145,7 @@ include('includes/base.header.php');
 
 
 	<div>
-		<div class = "jumbotron" style = "float: left;  height: 447px; width:35%;">
+		<div class = "jumbotron" style = "float: left;  height: 495px; width:35%;">
 			<div>
 				<?php
 				//emergency
@@ -216,7 +227,7 @@ echo "   </form>";
 
 <?php  // Insert button form for allergy	
 		echo"	<h3 class = \"text-primary\"> Add Allergy</h3>";
-   echo "<form class =\"form-inline\" action=\"data_allergy_send.php\" method=\"POST\"> ";
+   echo "<form class =\"form-inline\" action=\"includes/send.data.php\" method=\"POST\"> ";
    echo " <tr>";
    echo " <td><INPUT type=\"text\" class=\"form-control\"  name=\"name\" style=\"width:30%; margin: 7px; \" autocomplete=\"on\" placeholder=\"Allergy\" required/></td>";
    echo " <td><INPUT type=\"text\" name=\"diag\" class=\"form-control\"  style=\"width:50%; margin: 7px; margin-right: 15px;  \" autocomplete=\"on\" placeholder=\"Medical Diagnosis\" required/></td>";
@@ -287,7 +298,7 @@ echo "   </form>";
 	
 <?php  // Diet Insert button form	
 	echo"	<h3 class = \"text-primary\"> Add Diet</h3>";
-   echo "<form  class =\"form-inline\" action=\"data_diet_send.php\" method=\"POST\"> ";
+   echo "<form  class =\"form-inline\" action=\"includes/send.data.php\" method=\"POST\"> ";
    echo " <tr>";
    echo " <td><INPUT type=\"text\" name=\"Diet\" style=\"width:20%; margin: 7px; \" class=\"form-control\" autocomplete=\"on\" placeholder=\"Diet\" required/></td>";
    echo " <td><INPUT type=\"text\" name=\"Descr\" style=\"width:50%; margin: 7px; margin-right: 15px;  \" class=\"form-control\" autocomplete=\"on\" placeholder=\"Description\" required/></td>";
@@ -336,7 +347,7 @@ echo"	</div>";
             
             <?php  // Assessment Insert button form	
             	echo"	<h3 class = \"text-primary\"> Add Assessment</h3>";
-               echo "<form  class =\"form-inline\" action=\"data_assessment_send.php\" method=\"POST\"> ";
+               echo "<form  class =\"form-inline\" action=\"includes/send.data.php\" method=\"POST\"> ";
                echo " <tr>";
                echo " <td><INPUT type=\"text\" name=\"w\" style=\"width:10%; margin: 7px; \" class=\"form-control\" autocomplete=\"on\" placeholder=\"Weight\" required/></td>";
                echo " <td><INPUT type=\"text\" name=\"bp\" style=\"width:15%; margin: 7px; margin-right: 15px;  \" class=\"form-control\" autocomplete=\"on\" placeholder=\"Blood Pressure\" required/></td>";

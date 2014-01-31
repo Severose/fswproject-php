@@ -13,7 +13,9 @@ include('includes/base.header.php');
  <title>Hospitalization</title>
 
     <!-- Bootstrap core CSS -->
+
     <link href="./css/bootstrap.css" rel="stylesheet">
+
 
     <!-- Custom styles for this template -->
     <link href="navbar.css" rel="stylesheet">

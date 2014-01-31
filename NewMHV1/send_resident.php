@@ -1,12 +1,9 @@
 <?php
 
-include('includes/base.functions.php');
-// If allowed, unlimited script execution time
-  // set_time_limit(0);
 
-	// Jaime link and connect to the database 
-db_connect();// Checking connection
-$connection = @mysql_connect('localhost', 'cpsc499', 'AwNKQSaE');		
+include('includes/base.functions.php');
+
+
 
 $firstV = mysql_real_escape_string(stripslashes($_POST['first']));
 $middleV = mysql_real_escape_string(stripslashes($_POST['middle']));
@@ -94,8 +91,7 @@ if (!mysql_query($sql3,$connection))
 }
 
 
-echo"Resident Added. I like turtles!";
-mysql_close($connection);
+echo"Resident Added.";
 header('Location:homepage.php');
 
 ?>

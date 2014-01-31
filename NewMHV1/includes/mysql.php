@@ -65,6 +65,7 @@ function get_emergency_info($id){
 		$Emergency->number = $result['phone_number'];
 		$Emergency->address1 = $result['address1'];
 		$Emergency->address2 = $result['address2']. ', ' . $result['city'].' '.$result['zip_code'];
+		$Emergency->relationship = $result['relationship'];
 		return $Emergency;
 	};
 };
