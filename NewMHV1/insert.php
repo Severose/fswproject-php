@@ -1,5 +1,6 @@
-
-
+<?php
+include('includes/base.functions.php');
+?>
 <!DOCTYPE html>  
 <html lang="en"> 
 <head>  
@@ -10,7 +11,7 @@
  <title>HomePage</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
     <link href="navbar.css" rel="stylesheet">
@@ -56,51 +57,182 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h2>Insert Resident </h2>
-		
-		<form role="form"  action="send_resident.php" method = "post">
+<?php
+if(isset($_POST['edit'])){
+	//get patient data based on edit number
+	$selectedOption = $_POST['edit']; 
+	if($selectedOption != '') {
+		itemSelected($selectedOption,$resident,$doctor,$Emergency,$allergies,$diets,$Physical,$a,$m,$pre,$h);
+		//split the name again
+		$split_name = explode(" ",$resident->name);
+		$first_name = $split_name[0];
+		if(count($split_name)>2){
+			$middle_name = $split_name[1];
+			$last_name = $split_name[2];
+		}else{
+			$middle_name = "";
+			$last_name = $split_name[1];
+		};
+		//split address1
+		//$result['address1'] . " " . $result['address2'];
+		$split_addr1 = explode(" ",$resident->address1);
+		$address_street_number = $split_addr1[0];
+		$address_street_name = $split_addr1[1];
+		$address_street_type = $split_addr1[2];
+		if(count($split_addr1)>3){
+			$address_type = $split_addr1[3];
+			$address_type_number = $split_addr1[4];
+		}else{
+			$address_type = "";
+			$address_type_number = "";
+		};
+		//split the second address line again
+		//$result['city'] . ', ' . $result['state'] ." ". $result['zip_code']
+		$split_addr2 = explode(" ",$resident->address2);
+		$city = substr($split_addr2[0],0,(strlen($split_addr2[0])-1));
+		$state = $split_addr2[1];
+		$zip_code = $split_addr2[2];
+		//split Dr. name
+		$split_dr_name = explode(" ",$doctor->name);
+		$dr_first_name = $split_dr_name[0];
+		if(count($split_dr_name)>2){
+			$dr_middle_name = $split_dr_name[1];
+			$dr_last_name = $split_dr_name[2];
+		}else{
+			$dr_middle_name = "";
+			$dr_last_name = $split_dr_name[1];
+		};
+		//split emergency name
+		$split_emergency_name = explode(" ",$Emergency->name);
+		$emergency_first_name = $split_emergency_name[0];
+		if(count($split_emergency_name)>2){
+			$emergency_middle_name = $split_emergency_name[1];
+			$emergency_last_name = $split_emergency_name[2];
+		}else{
+			$emergency_middle_name = "";
+			$emergency_last_name = $split_emergency_name[1];
+		};
+		//split emergency address
+		$split_emergency_addr2 = explode(" ",$Emergency->address2);
+		$emergency_addr2 = $split_emergency_addr[0];
+		$emergency_city = $split_emergency_addr2[1];
+		//$emergency_state = $split_emergency_addr2[2];
+		$emergency_zip_code = $split_emergency_addr2[2];
+		echo "<form role='form' action='includes/send.data.php' method = 'post'>";
+	}else{
+		echo "<form role='form' action='send_resident.php' method = 'post'>";
+	};
+};
+?>
 		  <div class="form-group">
 		    <label >First Name</label>
-		    <input type="text" class="form-control" id="first" name = "first" placeholder="Enter first name">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='first' name = 'first' value='". $first_name ."'>";
+				}else{
+					echo"<input type='text' class='form-control' id='first' name = 'first' placeholder='Enter first name'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >Middle Name</label>
-		    <input type="text" class="form-control" id="middle" name = "middle" placeholder="Enter middle name">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='middle' name = 'middle' value='". $middle_name ."'>";
+				}else{
+					echo"<input type='text' class='form-control' id='middle' name = 'middle' placeholder='Enter middle name'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >Last Name</label>
-		    <input type="text" class="form-control" id="last" name = "last" placeholder="Enter last name">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='last' name = 'last' value='". $last_name ."'>";
+				}else{
+					echo"<input type='text' class='form-control' id='last' name = 'last' placeholder='Enter last name'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >Home Phone</label>
-		    <input type="text" class="form-control" id="home" name = "home" placeholder="Enter Home Phone">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='home' name = 'home' value='" . $resident->homenumber . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='home' name = 'home' placeholder='Enter Home Phone'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >Cell Phone</label>
-		    <input type="text" class="form-control" id="cell" name = "cell" placeholder="Enter Cell Phone">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='cell' name = 'cell' value='".$resident->cellnumber."'>";
+				}else{
+					echo"<input type='text' class='form-control' id='cell' name = 'cell' placeholder='Enter Cell Phone'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >Address 1</label>
-		    <input type="text" class="form-control" id="address1" name = "address1" placeholder="Enter Address">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='address1' name = 'address1' value='" . $address_street_number . " " . $address_street_name . " " . $address_street_type . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='address1' name = 'address1' placeholder='Enter Address'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >Address 2</label>
-		    <input type="text" class="form-control" id="address2" name = "address2" placeholder="Enter Address">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='address2' name = 'address2' value='" . $address_type ." " . $address_type_number . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='address2' name = 'address2' placeholder='Enter Address'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >City</label>
-		    <input type="text" class="form-control" id="city" name = "city" placeholder="Enter City">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='city' name = 'city' value='".$city."'>";
+				}else{
+					echo"<input type='text' class='form-control' id='city' name = 'city' placeholder='Enter City'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >State</label>
-		    <input type="text" class="form-control" id="state" name = "state" placeholder="Enter State">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='state' name = 'state' value='".$state."'>";
+				}else{
+					echo"<input type='text' class='form-control' id='state' name = 'state' placeholder='Enter State'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >Zipcode</label>
-		    <input type="text" class="form-control" id="zip" name = "zip" placeholder="Enter ZipCode">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='zip' name = 'zip' value='".$zip_code."'>";
+				}else{
+					echo"<input type='text' class='form-control' id='zip' name = 'zip' placeholder='Enter ZipCode'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >DB</label>
-		    <input type="text" class="form-control" id="db" name = "db" placeholder="Enter birth">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='db' name = 'db' value='".$resident->dob."'>";
+				}else{
+					echo"<input type='text' class='form-control' id='db' name = 'db' placeholder='Enter birth'>";
+				};
+			?>
 		  </div>
         </div>
 	
@@ -108,25 +240,46 @@
 <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h2>Doctor Information </h2>
-		
-		
-
 		  <div class="form-group">
 		    <label >Doctor First Name</label>
-		    <input type="text" class="form-control" id="dname" name = "dname" placeholder="Enter Name">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='dname' name = 'dname' value='Dr. " . $dr_first_name . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='dname' name = 'dname' placeholder='Enter Name'>";
+				};
+			?>
 		  </div>
 		<div class="form-group">
 		    <label >Doctor Last Name</label>
-		    <input type="text" class="form-control" id="dlast" name = "dlast" placeholder="Enter Name">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='dlast' name = 'dlast' value='" . $dr_last_name . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='dlast' name = 'dlast' placeholder='Enter Name'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >Specialty</label>
-		    <input type="text" class="form-control" id="ds" name = "ds" placeholder="Enter Specialty">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='ds' name = 'ds' value='" . $doctor->specialty . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='ds' name = 'ds' placeholder='Enter Specialty'>";
+				};
+			?>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label >Phone Number</label>
-		    <input type="text" class="form-control" id="dph" name = "dph" placeholder="Enter Phone Number">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='dph' name = 'dph' value='" . $doctor->number . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='dph' name = 'dph' placeholder='Enter Phone Number'>";
+				};
+			?>
 		  </div>
 	  </div>
 
@@ -137,47 +290,106 @@
 
 		  <div class="form-group">
 		    <label >First Name</label>
-		    <input type="text" class="form-control" id="cfirst" name = "cfirst" placeholder="Enter first name">
-			
-	        <!-- <input type="hidden" name="" value=""> -->
-			
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='cfirst' name = 'cfirst' value='" . $emergency_first_name . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='cfirst' name = 'cfirst' placeholder='Enter first name'>";
+				};
+			?>		
 		  </div>
 		  <div class="form-group">
 		    <label >Middle Name</label>
-		    <input type="text" class="form-control" id="cmiddle" name = "cmiddle" placeholder="Enter middle name">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='cmiddle' name = 'cmiddle' value='" . $emergency_middle_name . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='cmiddle' name = 'cmiddle' placeholder='Enter middle name'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >Last Name</label>
-		    <input type="text" class="form-control" id="clast" name = "clast" placeholder="Enter last name">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='clast' name = 'clast' value='" . $emergency_last_name . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='clast' name = 'clast' placeholder='Enter last name'>";
+				};
+			?>
 		  </div>
 
 		  <div class="form-group">
 		    <label >Phone Number</label>
-		    <input type="text" class="form-control" id="chome" name = "chome" placeholder="Enter Phone Number">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='chome' name = 'chome' value='" . $Emergency->number . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='chome' name = 'chome' placeholder='Enter Phone Number'>";
+				};
+			?>
 		  </div>
 
 		  <div class="form-group">
 		    <label >Address 1</label>
-		    <input type="text" class="form-control" id="caddress1" name = "caddress1" placeholder="Enter Address">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='caddress1' name = 'caddress1' value='" . $Emergency->address1 . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='caddress1' name = 'caddress1' placeholder='Enter Address'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >Address 2</label>
-		    <input type="text" class="form-control" id="caddress2" name = "caddress2" placeholder="Enter Address">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='caddress2' name = 'caddress2' value='" . $emergency_addr2 . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='caddress2' name = 'caddress2' placeholder='Enter Address'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >City</label>
-		    <input type="text" class="form-control" id="ccity" name = "ccity" placeholder="Enter City">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='ccity' name = 'ccity' value='" . $emergency_city . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='ccity' name = 'ccity' placeholder='Enter City'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >Zipcode</label>
-		    <input type="text" class="form-control" id="czip" name = "czip" placeholder="Enter ZipCode">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='czip' name = 'czip' value='" . $emergency_zip_code . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='czip' name = 'czip' placeholder='Enter ZipCode'>";
+				};
+			?>
 		  </div>
 		  <div class="form-group">
 		    <label >Relation</label>
-		    <input type="text" class="form-control" id="crelation" name = "crelation" placeholder="Enter State">
+			<?php
+				if($selectedOption != ''){
+					echo"<input type='text' class='form-control' id='crelation' name = 'crelation' value='" . $Emergency->relationship . "'>";
+				}else{
+					echo"<input type='text' class='form-control' id='crelation' name = 'crelation' placeholder='Enter Relationship'>";
+				};
+			?>
 		  </div>
-
-		  <button type="submit" class="btn btn-primary btn-lg" name = "submit">Submit</button>
+<?php
+		if($selectedOption != '') {
+			echo "<input type='hidden' id='resident_id' name='resident_id' value='" . $selectedOption . "'>";
+			echo "<input type='hidden' id='doctor_id' name='doctor_id' value='" . $doctor->doc_id . "'>";
+			echo "<input type='hidden' id='update_resident' name='update_resident' value='1'>";
+			echo "<button type='submit' class='btn btn-primary btn-lg' name = 'submit'>Update</button>";
+		}else{
+			echo "<button type='submit' class='btn btn-primary btn-lg' name = 'submit'>Submit</button>";
+		};
+?>
 		</form>
         <div>
 

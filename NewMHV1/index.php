@@ -14,7 +14,7 @@
 
     <!-- Bootstrap core CSS -->
     <!-- Bootstrap -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">

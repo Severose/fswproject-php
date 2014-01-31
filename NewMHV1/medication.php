@@ -13,7 +13,7 @@ include('includes/base.header.php');
  <title>Medication</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
     <link href="navbar.css" rel="stylesheet">

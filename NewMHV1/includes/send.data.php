@@ -4,6 +4,9 @@ include('mysql.php');
 function clean_data($data){
 	return "'" . mysql_real_escape_string(stripslashes($data)) . "'";
 };
+function clean_data_update($data){
+	return mysql_real_escape_string(stripslashes($data));
+};
 
 function insert_data($table,$row_list,$values){
 	$query = mysql_query("INSERT INTO " . $table . " (" . $row_list . ") VALUES(" . $values . ")");
@@ -12,6 +15,107 @@ function insert_data($table,$row_list,$values){
 	if(!$query){
 		echo mysql_error();
 	};
+};
+
+function Update_Data($table,$update_field,$update_data,$field_name,$key){
+	for($i=0;$i<count($update_field);$i++){
+		if($i==0){
+			$statement="$update_field[$i]='$update_data[$i]'";
+		}else{
+			$statement="$statement, $update_field[$i]='$update_data[$i]' ";
+		};
+	};
+	//echo "<br>";
+	//echo "<b>SQL Statement Section:</b> " . $statement . "<br>";
+	//echo "<b>Full SQL Query:</b> UPDATE " . $table . " SET " . $statement . " WHERE " . $field_name . "='" . $key . "'<br>";
+	$sql_query=mysql_query("UPDATE " . $table . " SET " . $statement . " WHERE " . $field_name . "='" . $key . "'");
+	if(!$sql_query){
+		echo mysql_error();
+	};
+};
+
+//resident update send
+if(isset($_POST['update_resident'])){
+	//resident info
+	$table = "resident";
+	$field_name="resident_id";
+	$key=$_POST['resident_id'];
+	$update_data=array();
+	$update_data[0]=clean_data_update($_POST['first']);
+	$update_data[1]=clean_data_update($_POST['middle']);
+	$update_data[2]=clean_data_update($_POST['last']);
+	$update_data[3]=clean_data_update($_POST['address1']);
+	$update_data[4]=clean_data_update($_POST['address2']);
+	$update_data[5]=clean_data_update($_POST['city']);
+	$update_data[6]=clean_data_update($_POST['state']);
+	$update_data[7]=clean_data_update($_POST['zip']);
+	$update_data[8]=clean_data_update($_POST['home']);
+	$update_data[9]=clean_data_update($_POST['cell']);
+	$update_data[10]=clean_data_update($_POST['db']);
+	
+	$update_field=array();
+	$update_field[0]="first_name";
+	$update_field[1]="middle_name";
+	$update_field[2]="last_name";
+	$update_field[3]="address1";
+	$update_field[4]="address2";
+	$update_field[5]="city";
+	$update_field[6]="state";
+	$update_field[7]="zip_code";
+	$update_field[8]="home_phone";
+	$update_field[9]="cell_phone";
+	$update_field[10]="date_of_birth";
+	//submit resident info query for update
+	Update_Data($table,$update_field,$update_data,$field_name,$key);
+	
+	//overwrite some variables!
+	//doctor info
+	$table = "doctor";
+	$field_name = "doctor_id";
+	$key=$_POST['doctor_id'];
+	$update_data=array();
+	$update_data[0]=clean_data_update($_POST['dname']);
+	$update_data[1]=clean_data_update($_POST['dlast']);
+	$update_data[2]=clean_data_update($_POST['ds']);
+	$update_data[3]=clean_data_update($_POST['dph']);
+
+	$update_field=array();
+	$update_field[0]="first_name";
+	$update_field[1]="last_name";
+	$update_field[2]="specialization";
+	$update_field[3]="phone_number";
+	//submit doctor info query for update
+	Update_Data($table,$update_field,$update_data,$field_name,$key);
+	
+	
+	//overwrite even more variables!
+	//emergency info
+	$table = "emergency_contact";
+	$field_name = "resident_id";
+	$key=$_POST['resident_id'];
+	$update_data=array();
+	$update_data[0]=clean_data_update($_POST['cfirst']);
+	$update_data[1]=clean_data_update($_POST['cmiddle']);
+	$update_data[2]=clean_data_update($_POST['clast']);
+	$update_data[3]=clean_data_update($_POST['chome']);
+	$update_data[4]=clean_data_update($_POST['caddress1']);
+	$update_data[5]=clean_data_update($_POST['caddress2']);
+	$update_data[6]=clean_data_update($_POST['ccity']);
+	$update_data[7]=clean_data_update($_POST['czip']);
+	$update_data[8]=clean_data_update($_POST['crelation']);
+
+	$update_field=array();
+	$update_field[0]="first_name";
+	$update_field[1]="middle_name";
+	$update_field[2]="last_name";
+	$update_field[3]="phone_number";
+	$update_field[4]="address1";
+	$update_field[5]="address2";
+	$update_field[6]="city";
+	$update_field[7]="zip_code";
+	$update_field[8]="relationship";
+	//submit emergency info query for update
+	Update_Data($table,$update_field,$update_data,$field_name,$key);
 };
 
 //diet send
