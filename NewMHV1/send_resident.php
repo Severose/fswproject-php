@@ -1,5 +1,5 @@
 <?php
-include('includes/base.header.php');
+include('includes/base.functions.php');
 
 $firstV = mysql_real_escape_string(stripslashes($_POST['first']));
 $middleV = mysql_real_escape_string(stripslashes($_POST['middle']));
