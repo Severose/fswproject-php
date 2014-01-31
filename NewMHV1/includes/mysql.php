@@ -44,6 +44,7 @@ function get_resident_info($id){
 		$resident->cellnumber = $result['cell_phone'];
 		$resident->address1 = $result['address1'] . " " . $result['address2'];
 		$resident->address2 = $result['city'] . ', ' . $result['state'] ." ". $result['zip_code'];
+		$resident->imgurl = $result['imgurl'];
 		return $resident;
 	};
 };

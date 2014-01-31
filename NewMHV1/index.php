@@ -14,7 +14,7 @@
 
     <!-- Bootstrap core CSS -->
     <!-- Bootstrap -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="./css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
@@ -52,7 +52,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
       <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
       
       <script language="javascript"> function check(form)/*function to check userid & password*/ { /*the
       following code checkes whether the entered userid and password are matching*/ if(form.user.value ==

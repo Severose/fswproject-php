@@ -10,7 +10,7 @@
  <title>HomePage</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="./css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="navbar.css" rel="stylesheet">
@@ -57,7 +57,7 @@
       <div class="jumbotron">
         <h2>Insert Resident </h2>
 		
-		<form role="form"  action="send_resident.php" method = "post">
+		<form role="form"  action="send_resident.php" method = "post" enctype="multipart/form-data">
 		  <div class="form-group">
 		    <label >First Name</label>
 		    <input type="text" class="form-control" id="first" name = "first" placeholder="Enter first name">
@@ -101,6 +101,10 @@
 		  <div class="form-group">
 		    <label >DB</label>
 		    <input type="text" class="form-control" id="db" name = "db" placeholder="Enter birth">
+		  </div>
+		  <div class="form-group">
+		  	<label >Photo</label>
+			<input type="file" class="form-control" id="imgurl" name="imgurl" size="400">
 		  </div>
         </div>
 	
@@ -188,6 +192,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
   </body>
 </html>

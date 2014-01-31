@@ -1,3 +1,4 @@
+
 <?php
 $selectedOption = $_GET['patient']; 
 if($selectedOption != '') {
@@ -7,3 +8,4 @@ if($selectedOption != '') {
 /* Get each patient's data from the database */
 getDropDownBoxData($patients);
 ?>
+

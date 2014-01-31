@@ -50,8 +50,8 @@ if(isset($_POST['w'])){
 //resident send
 if(isset($_POST['address1'])){
 	$table = "resident";
-	$row_list = "first_name, middle_name, last_name, address1, address2, city, state, zipcode, home_phone, cell_phone ,date_of_birth";
-	$values = "" . clean_data($_POST['first']) . "," . clean_data($_POST['middle']) . "," . clean_data($_POST['last']) . "," . clean_data($_POST['address1']) . "," . clean_data($_POST['address2']) . "," . clean_data($_POST['city']) . "," . clean_data($_POST['state']) . "," . clean_data($_POST['zip']) . "," . clean_data($_POST['home']) . "," . clean_data($_POST['cell']) . "," . clean_data($_POST['bday']) . "";
+	$row_list = "first_name, middle_name, last_name, address1, address2, city, state, zipcode, home_phone, cell_phone ,date_of_birth, imgurl";
+	$values = "" . clean_data($_POST['first']) . "," . clean_data($_POST['middle']) . "," . clean_data($_POST['last']) . "," . clean_data($_POST['address1']) . "," . clean_data($_POST['address2']) . "," . clean_data($_POST['city']) . "," . clean_data($_POST['state']) . "," . clean_data($_POST['zip']) . "," . clean_data($_POST['home']) . "," . clean_data($_POST['cell']) . "," . clean_data($_POST['bday']) . "," . clean_data($_POST['img']) ."";
 	insert_data($table,$row_list,$values);
 };
 //print_r($_POST);

@@ -13,7 +13,7 @@ include('includes/base.header.php');
  <title>Data</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="./css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="navbar.css" rel="stylesheet">
@@ -63,9 +63,10 @@ include('includes/base.header.php');
 	 <div class = "container">
 		 <div>
       <!-- Main component for a primary marketing message or call to action -->
-	  <div class="jumbotron" style ="height: 200px;  " >
+	  <div class = "jumbotron" style = "float: left; width:100%;">
 		  <div>
         	<h3>Search for Resident </h3>
+
 		
 			<!--Drop down thing -->
 
@@ -75,18 +76,28 @@ include('includes/base.header.php');
 			</div>
 	</div>
 </div>
+
+
+
+
+
 </div>
+
+
 
 
 <div class = "container">
 <div>
+
 		<div class = "jumbotron" style = "float: left; width:35%;">
 			
 			<div>
+							<?php
+				if ($resident->imgurl == null){$patient_img = "images/download.jpeg";}else{$patient_img = $resident->imgurl;}
+				echo "<img src=\"".$patient_img."\" alt=\"".$resident->name."\" style=\"overflow:hidden; white-space:nowrap; text-overflow:ellipsis;\" class=\"img-rounded\" width=\"126\" height=\"144\">";
+			?>
 				
 				<?php
-				// patient info
-				
 				echo "					<h2 class =\"text-info emphasis" . " style=\"font-size:24px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;\"><strong>".$resident->name."</strong></h2>";
 				echo "					<h4 style=\"color:black\"><strong> Date of Birth:</strong> ".$resident->dob."</h4>";
 				echo "					<h4 style=\"overflow:hidden; white-space:nowrap; text-overflow:ellipsis;\"><strong>Home Phone:</strong> $resident->homenumber</h4>";
@@ -94,7 +105,7 @@ include('includes/base.header.php');
 
 				echo "					<h4 style=\"overflow:hidden; white-space:nowrap; text-overflow:ellipsis;\" >$resident->address1</h4>";
 				echo "					<h4 style=\"overflow:hidden; white-space:nowrap; text-overflow:ellipsis;\" >$resident->address2</h4>";
-				?>
+				?> 
 			
 			</div>
 			
@@ -104,7 +115,7 @@ include('includes/base.header.php');
 	</div>
 		
 	<div>
-		<div class = "jumbotron" style = "float: left;  height: 300px; width: 30%;">
+		<div class = "jumbotron" style = "float: left;  height: 447px; width: 30%;">
 			<div>
 				<?php
 				//doctor info
@@ -123,7 +134,7 @@ include('includes/base.header.php');
 
 
 	<div>
-		<div class = "jumbotron" style = "float: left;  height: 300px; width:35%;">
+		<div class = "jumbotron" style = "float: left;  height: 447px; width:35%;">
 			<div>
 				<?php
 				//emergency

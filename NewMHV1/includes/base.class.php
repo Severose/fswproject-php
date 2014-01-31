@@ -20,6 +20,7 @@ class ResidentInfo
 	public $cellnumber; 
 	public $address1; 
 	public $address2; 
+	public $imgurl;
 }
 
 $resident = new ResidentInfo(); // create one resident info struct

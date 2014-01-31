@@ -1,12 +1,12 @@
 <?php
+
+include('includes/base.functions.php');
 // If allowed, unlimited script execution time
   // set_time_limit(0);
 
 	// Jaime link and connect to the database 
-$connection=mysql_connect("localhost");
-
-$sel= mysql_select_db("residents",$connection)// Checking connection
-		or die("I diied!!");
+db_connect();// Checking connection
+$connection = @mysql_connect('localhost', 'cpsc499', 'AwNKQSaE');		
 
 $firstV = mysql_real_escape_string(stripslashes($_POST['first']));
 $middleV = mysql_real_escape_string(stripslashes($_POST['middle']));
@@ -14,15 +14,18 @@ $lastV = mysql_real_escape_string(stripslashes($_POST['last']));
 $homeV = mysql_real_escape_string(stripslashes($_POST['home']));
 $cellV = mysql_real_escape_string(stripslashes($_POST['cell']));
 $address1V = mysql_real_escape_string(stripslashes($_POST['address1']));
-$address2V = mysql_real_escape_string(stripslashes($_POST['adddress2']));
+$address2V = mysql_real_escape_string(stripslashes($_POST['address2']));
 $cityV = mysql_real_escape_string(stripslashes($_POST['city']));
 $stateV = mysql_real_escape_string(stripslashes($_POST['state']));
 $zipV = mysql_real_escape_string(stripslashes($_POST['zip']));
 $dbV = mysql_real_escape_string(stripslashes($_POST['db']));
+$imgurlV = mysql_real_escape_string(stripslashes("images/" . $_FILES["imgurl"]["name"]));
 
-$sql="INSERT INTO resident ( resident_id, first_name, middle_name, last_name, address1, address2, city, state, zip_code, 	home_phone, cell_phone,date_of_birth )
+$sql="INSERT INTO resident ( resident_id, first_name, middle_name, last_name, address1, address2, city, state, zip_code, home_phone, cell_phone, date_of_birth, imgurl )
  VALUES
- ('','$firstV','$middleV','$lastV','$address1V','$address2V', '$cityV' ,'$stateV', '$zipV','$homeV','$cellV','$dbV')";
+ ('','$firstV','$middleV','$lastV','$address1V','$address2V', '$cityV' ,'$stateV', '$zipV','$homeV','$cellV','$dbV', '$imgurlV')";
+
+uploadPhoto();
 
 if (!mysql_query($sql,$connection))
 {
