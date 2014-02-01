@@ -82,7 +82,7 @@ include('includes/base.functions.php');
             $subject = "Feedback Form";
             $mailheader = "From: $email \r\n";
             mail($recipient, $subject, $formcontent, $mailheader) or die("Error!");
-            echo "Thank You For Your Feedback!" . " -" . "<a href='homepage.html' style='text-decoration:none;color:#ff0099;'> Return Home</a>";
+            echo "Thank You For Your Feedback!" . " -" . "<a href='homepage.php' style='text-decoration:none;color:#ff0099;'> Return Home</a>";
             ?>
 
       </div>
