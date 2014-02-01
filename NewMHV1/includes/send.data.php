@@ -1,5 +1,5 @@
 <?php
-include('mysql.php');
+include('base.functions.php');
 //we can split this depending on key $_POST vars.
 function clean_data($data){
 	return "'" . mysql_real_escape_string(stripslashes($data)) . "'";
@@ -34,6 +34,78 @@ function Update_Data($table,$update_field,$update_data,$field_name,$key){
 	};
 };
 
+if((isset($_POST['delete_resident'])) && (isset($_POST['delete_doctor']))){
+	//clean the post string, just in case.
+	$resident_id = clean_data_update($_POST['delete_resident']);
+	$doctor_id = clean_data_update($_POST['delete_doctor']);
+	//delete the resident entry
+	$query=mysql_query("DELETE FROM `resident` WHERE `resident_id` = '" . $resident_id . "'");
+	if(!$query){
+		echo mysql_error();
+	};
+		//delete from allergic_medication
+		$query=mysql_query("DELETE FROM `allergic_medication` WHERE `resident_id` = '" . $resident_id . "'");
+		if(!$query){
+			echo mysql_error();
+		};
+		//delete from allergy
+		$query=mysql_query("DELETE FROM `allergy` WHERE `resident_id` = '" . $resident_id . "'");
+		if(!$query){
+			echo mysql_error();
+		};
+		//delete from assessment
+		$query=mysql_query("DELETE FROM `assessment` WHERE `resident_id` = '" . $resident_id . "'");
+		if(!$query){
+			echo mysql_error();
+		};
+		//delete from diet
+		$query=mysql_query("DELETE FROM `diet` WHERE `resident_id` = '" . $resident_id . "'");
+		if(!$query){
+			echo mysql_error();
+		};
+		//delete from hospitalization
+		$query=mysql_query("DELETE FROM `hospitalization` WHERE `resident_id` = '" . $resident_id . "'");
+		if(!$query){
+			echo mysql_error();
+		};
+		//delete from medication
+		$query=mysql_query("DELETE FROM `medication` WHERE `resident_id` = '" . $resident_id . "'");
+		if(!$query){
+			echo mysql_error();
+		};
+		//delete from medication_history
+		$query=mysql_query("DELETE FROM `medication_history` WHERE `resident_id` = '" . $resident_id . "'");
+		if(!$query){
+			echo mysql_error();
+		};
+		//delete from physical
+		$query=mysql_query("DELETE FROM `physical` WHERE `resident_id` = '" . $resident_id . "'");
+		if(!$query){
+			echo mysql_error();
+		};
+		//delete from perscription
+		$query=mysql_query("DELETE FROM `prescription` WHERE `resident_id` = '" . $resident_id . "'");
+		if(!$query){
+			echo mysql_error();
+		};
+		//delete from resident_to_doctor
+		$query=mysql_query("DELETE FROM `resident_to_doctor` WHERE `resident_id` = '" . $resident_id . "'");
+		if(!$query){
+			echo mysql_error();
+		};
+	//delete the doctor entry
+	$query=mysql_query("DELETE FROM `doctor` WHERE `doctor_id` = '" . $doctor_id . "'");
+	if(!$query){
+		echo mysql_error();
+	};
+	//delete the emergency contact info
+	$query=mysql_query("DELETE FROM `emergency_contact` WHERE `resident_id` = '" . $resident_id . "'");
+	if(!$query){
+		echo mysql_error();
+	};
+	//die;
+};
+
 //resident update send
 if(isset($_POST['update_resident'])){
 	//resident info
@@ -52,6 +124,10 @@ if(isset($_POST['update_resident'])){
 	$update_data[8]=clean_data_update($_POST['home']);
 	$update_data[9]=clean_data_update($_POST['cell']);
 	$update_data[10]=clean_data_update($_POST['db']);
+	//only do a photo upload if they changed it
+	if($_FILES["imgurl"]["name"] != ""){
+		$update_data[11]=clean_data_update("images/" . $_FILES["imgurl"]["name"]);
+	};
 	
 	$update_field=array();
 	$update_field[0]="first_name";
@@ -65,9 +141,14 @@ if(isset($_POST['update_resident'])){
 	$update_field[8]="home_phone";
 	$update_field[9]="cell_phone";
 	$update_field[10]="date_of_birth";
+	if($_FILES["imgurl"]["name"] != ""){
+		$update_field[11]="imgurl";
+	
+		//upload the image before we go about adding it to the database
+		uploadPhoto();
+	};
 	//submit resident info query for update
 	Update_Data($table,$update_field,$update_data,$field_name,$key);
-	
 	//overwrite some variables!
 	//doctor info
 	$table = "doctor";

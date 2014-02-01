@@ -29,6 +29,16 @@ include('includes/base.header.php');
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+	<script language="JavaScript">
+	function confirmBox(){
+	 var where_to= confirm("Are you sure you want to delete this resident?");
+	 if (where_to== true)
+		 return true;
+	 else{
+		 return false;
+	 }
+	}
+	</script>
   </head>
 
   <body>
@@ -109,10 +119,21 @@ include('includes/base.header.php');
 				echo "					<h4 style=\"overflow:hidden; white-space:nowrap; text-overflow:ellipsis;\" >$resident->address2</h4>";
 
 				?> 
-								<form role="form"  action="insert.php" method = "post">
-					<input type='hidden' name='edit' value='<?php echo $selectedOption; ?>'>
-					<button type="submit" class="btn btn-primary btn-lg" name = "submit">Edit Info</button>
-				</form>
+				<div style='display:block;'>
+					<div style='display:block;float:left;'>
+						<form role="form"  action="insert.php" method = "post">
+							<input type='hidden' name='edit' value='<?php echo $selectedOption; ?>'>
+							<button type="submit" class="btn btn-primary btn-lg" name = "submit">Edit Info</button>
+						</form>
+					</div>
+					<div style='display:block;float:left;padding-left:5px;'>
+						<form role="form"  action="includes/send.data.php" method = "post">
+							<input type='hidden' name='delete_resident' value='<?php echo $selectedOption; ?>'>
+							<input type='hidden' name='delete_doctor' value='<?php echo $doctor->doc_id; ?>'>
+							<button type="submit" class="btn btn-danger btn-lg" onclick="return confirmBox()" name = "submit">Delete</button>
+						</form>
+					</div>
+				</div>
 			
 
 		

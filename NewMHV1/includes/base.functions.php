@@ -1,7 +1,7 @@
 <?php
 include('mysql.php');
 include('base.class.php');
-ini_set( 'display_errors', 0 );
+//ini_set( 'display_errors', 0 );
 
 /* Function which generates the webpage; called when a patient is selected from the dropdown box
  * @param selectedOption - current patient ID */
@@ -46,47 +46,36 @@ function generateDropDownBox(&$patients)
 	echo '</FORM>';
 }
 
-function uploadPhoto()
-{
+function uploadPhoto(){
 	echo "uploading file";
 	$allowedExts = array("gif", "jpeg", "jpg", "png");
-$temp = explode(".", $_FILES["imgurl"]["name"]);
-$extension = end($temp);
-if ((($_FILES["imgurl"]["type"] == "image/gif")
-|| ($_FILES["imgurl"]["type"] == "image/jpeg")
-|| ($_FILES["imgurl"]["type"] == "image/jpg")
-|| ($_FILES["imgurl"]["type"] == "image/pjpeg")
-|| ($_FILES["imgurl"]["type"] == "image/x-png")
-|| ($_FILES["imgurl"]["type"] == "image/png"))
-&& ($_FILES["imgurl"]["size"] < 20000000)
-&& in_array($extension, $allowedExts))
-  {
-  if ($_FILES["imgurl"]["error"] > 0)
-    {
-    echo "Return Code: " . $_FILES["imgurl"]["error"] . "<br>";
-    }
-  else
-    {
-    echo "Upload: " . $_FILES["imgurl"]["name"] . "<br>";
-    echo "Type: " . $_FILES["imgurl"]["type"] . "<br>";
-    echo "Size: " . ($_FILES["imgurl"]["size"] / 1024) . " kB<br>";
-    echo "Temp file: " . $_FILES["imgurl"]["tmp_name"] . "<br>";
+	$temp = explode(".", $_FILES["imgurl"]["name"]);
+	$extension = end($temp);
+	if ((($_FILES["imgurl"]["type"] == "image/gif")
+	|| ($_FILES["imgurl"]["type"] == "image/jpeg")
+	|| ($_FILES["imgurl"]["type"] == "image/jpg")
+	|| ($_FILES["imgurl"]["type"] == "image/pjpeg")
+	|| ($_FILES["imgurl"]["type"] == "image/x-png")
+	|| ($_FILES["imgurl"]["type"] == "image/png"))
+	&& ($_FILES["imgurl"]["size"] < 20000000)
+	&& in_array($extension, $allowedExts)){
+		if ($_FILES["imgurl"]["error"] > 0){
+			echo "Return Code: " . $_FILES["imgurl"]["error"] . "<br>";
+		}else{
+			echo "Upload: " . $_FILES["imgurl"]["name"] . "<br>";
+			echo "Type: " . $_FILES["imgurl"]["type"] . "<br>";
+			echo "Size: " . ($_FILES["imgurl"]["size"] / 1024) . " kB<br>";
+			echo "Temp file: " . $_FILES["imgurl"]["tmp_name"] . "<br>";
 
-    if (file_exists("images/" . $_FILES["imgurl"]["name"]))
-      {
-      echo $_FILES["imgurl"]["name"] . " already exists. ";
-      }
-    else
-      {
-      move_uploaded_file($_FILES["imgurl"]["tmp_name"],
-      "images/" . $_FILES["imgurl"]["name"]);
-      echo "Stored in: " . "images/" . $_FILES["imgurl"]["name"];
-      }
-    }
-  }
-else
-  {
-  echo "Invalid file";
-  }
-}
+			if (file_exists("images/" . $_FILES["imgurl"]["name"])){
+				echo $_FILES["imgurl"]["name"] . " already exists. ";
+			}else{
+				move_uploaded_file($_FILES["imgurl"]["tmp_name"],"../images/" . $_FILES["imgurl"]["name"]);
+				echo "Stored in: " . "images/" . $_FILES["imgurl"]["name"];
+			};
+		};
+	}else{
+		echo "Invalid file";
+	};
+};
 ?>

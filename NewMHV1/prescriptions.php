@@ -52,7 +52,7 @@ include('includes/base.header.php');
 			  
 		  	echo "				<li><a href=\"data.php?patient=$selectedOption\"><span>Data</span></a></li>";
 			echo "				<li><a href=\"medication.php?patient=$selectedOption\"><span>Medication</span></a></li>";
-			echo "				<li class=\"current\"><a><span>Prescription</span></a></li>";
+			echo "				<li class=\"current\"><a><span>Prescriptions</span></a></li>";
 		  	echo "				<li><a href=\"hospitalization.php?patient=$selectedOption\"><span>Hospitalization</span></a></li>";
 		  	echo "				<li><a href=\"medicationhistory.php?patient=$selectedOption\"><span>Medication History</span></a></li>";
 		  	echo "				<li><a href=\"index.html\"><span>SignOut</span></a></li>";

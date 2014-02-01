@@ -121,9 +121,9 @@ if(isset($_POST['edit'])){
 		$emergency_city = $split_emergency_addr2[1];
 		//$emergency_state = $split_emergency_addr2[2];
 		$emergency_zip_code = $split_emergency_addr2[2];
-		echo "<form role='form' action='includes/send.data.php' method = 'post'>";
+		echo "<form role='form' action='includes/send.data.php' method = 'post' enctype='multipart/form-data'>";
 	}else{
-		echo "<form role='form' action='send_resident.php' method = 'post'>";
+		echo "<form role='form' action='send_resident.php' method = 'post' enctype='multipart/form-data'>";
 	};
 };
 ?>
@@ -252,7 +252,7 @@ if(isset($_POST['edit'])){
 		    <label >Doctor First Name</label>
 			<?php
 				if($selectedOption != ''){
-					echo"<input type='text' class='form-control' id='dname' name = 'dname' value='Dr. " . $dr_first_name . "'>";
+					echo"<input type='text' class='form-control' id='dname' name = 'dname' value='" . $dr_first_name . "'>";
 				}else{
 					echo"<input type='text' class='form-control' id='dname' name = 'dname' placeholder='Enter Name'>";
 				};
