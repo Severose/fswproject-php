@@ -73,7 +73,7 @@ include('includes/base.functions.php');
               </div>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" id="Medication History" name="Medication History"> Medication History
+                  <input type="checkbox" id="MedicationHistory" name="MedicationHistory"> Medication History
                 </label>
               </div>
             </div>

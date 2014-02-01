@@ -58,7 +58,7 @@ include('includes/base.functions.php');
             $main = $_POST['Main'];
             $data = $_POST['Data'];
             $medications = $_POST['Medications'];
-            $medicationhistory = $_POST['Medication History'];
+            $medicationhistory = $_POST['MedicationHistory'];
             $prescriptions = $_POST['Prescriptions'];
             $hospitalization = $_POST['Hospitalization'];
             $other = $_POST['Other'];
