@@ -53,9 +53,8 @@ include('includes/base.header.php');
 			echo "				<li><a href=\"medication.php?patient=$selectedOption\"><span>Medication</span></a></li>";
 		  	echo "				<li><a href=\"prescriptions.php?patient=$selectedOption\"><span>Prescriptions</span></a></li>";
 			echo "				<li><a href=\"hospitalization.php?patient=$selectedOption\"><span>Hospitalization</span></a></li>";		 
-//		 	echo "				<li><a href=\"medicationhistory.php?patient=$selectedOption\"><span>Medication 
-//History</span></a></li>";
 			echo "				<li class=\"current\"><a><span>Medication History</span></a></li>";
+			echo "				<li><a href=\"feedback.php?patient=$selectedOption\"><span>Feedback Form</span></a></li>";
 		  	echo "				<li><a href=\"index.html\"><span>SignOut</span></a></li>";
 			?>
 			  	

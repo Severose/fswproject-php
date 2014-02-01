@@ -51,6 +51,7 @@ include('includes/base.functions.php');
             <li><a href="#">Prescriptions</a></li>
               <li><a href="#">Hospitalizations</a></li>
               <li><a href="#">Medication History</a></li>
+              <li><a href="feedback.php">Feedback Form</a></li>
               <li><a  href = "index.html">Sign out</a></li>
           </ul>
         </div>
